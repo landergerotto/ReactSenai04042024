@@ -35,6 +35,7 @@ const defaultOptions = {
 }
 
 function MyVerticallyCenteredModal(props) {
+  console.log(props)
   return (
     <Modal
       {...props}
@@ -125,7 +126,7 @@ function App() {
             <h2>Showroom de produtos</h2>
             <div style={{ display: 'flex', flexWrap: 'wrap' }}>
               {produtos.map((item) => {
-                console.log(item)
+                // console.log(item)
                 return (
                   <Card name={item.name} desc={item.desc} value={item.value} image={item.image} categoria={item.categoria} status={item.status} key={item.id} />
                 )
@@ -144,16 +145,17 @@ function App() {
             </div>
             <div style={{ display: 'flex', flexWrap: 'wrap' }}>
               {data.map((item, index) => {
+                console.log(item)
                 return (
                   <div key={item.id} style={{ backgroundColor: 'grey', margin: '20px', padding: '20px', borderRadius: '10px' }}>
                     <ApiCard key={index} name={item.name} species={item.species} gender={item.gender} type={item.type} status={item.status} image={item.image} />
                     <button onClick={() => openModal()}>Info</button>
-                    <Tilt options={defaultOptions}>
-                      <MyVerticallyCenteredModal
-                        show={modalIsOpen}
-                        onHide={() => setIsOpen(false)}
-                      />
-                    </Tilt>
+
+                    <MyVerticallyCenteredModal
+                      show={modalIsOpen}
+                      onHide={() => setIsOpen(false)}
+                    />
+
                   </div>
                 )
               })}
