@@ -1,0 +1,31 @@
+.wrapBtns {
+  width: 100%;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1vw;
+  position: fixed;
+  top: 0; 
+  background-color: gray;
+
+}
+
+.wrapPage {
+  color: white;
+
+  width: 100%;
+  margin-top: 50px;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: left;
+  justify-content: center;
+  gap: 1vh;
+  padding: 10px;
+  background-color: rgb(47, 47, 47);
+}
+
+.leaflet-control-attribution{
+  display: none;
+}
