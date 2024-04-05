@@ -23,10 +23,10 @@ import Modal from 'react-bootstrap/Modal';
 import { Tilt } from 'react-tilt'
 
 const defaultOptions = {
-  reverse: false,  // reverse the tilt direction
-  max: 35,     // max tilt rotation (degrees)
+  reverse: true,  // reverse the tilt direction
+  max: 20,     // max tilt rotation (degrees)
   perspective: 1000,   // Transform perspective, the lower the more extreme the tilt gets.
-  scale: 1.1,    // 2 = 200%, 1.5 = 150%, etc..
+  scale: 1.05,    // 2 = 200%, 1.5 = 150%, etc..
   speed: 1000,   // Speed of the enter/exit transition
   transition: true,   // Set a transition on enter/exit.
   axis: null,   // What axis should be disabled. Can be X or Y.
@@ -35,7 +35,7 @@ const defaultOptions = {
 }
 
 function MyVerticallyCenteredModal(props) {
-  console.log(props)
+  // console.log(props)
   return (
     <Modal
       {...props}
@@ -45,16 +45,12 @@ function MyVerticallyCenteredModal(props) {
     >
       <Modal.Header closeButton>
         <Modal.Title id="contained-modal-title-vcenter">
-          Modal heading
+          {props.item.species}
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <h4>Centered Modal</h4>
-        <p>
-          Cras mattis consectetur purus sit amet fermentum. Cras justo odio,
-          dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta ac
-          consectetur ac, vestibulum at eros.
-        </p>
+        <p>{props.item.type}</p>
+        <p>{props.item.gender}</p>
       </Modal.Body>
       <Modal.Footer>
         <Button onClick={props.onHide}>Close</Button>
@@ -145,18 +141,21 @@ function App() {
             </div>
             <div style={{ display: 'flex', flexWrap: 'wrap' }}>
               {data.map((item, index) => {
-                console.log(item)
+                // console.log(item)
                 return (
-                  <div key={item.id} style={{ backgroundColor: 'grey', margin: '20px', padding: '20px', borderRadius: '10px' }}>
-                    <ApiCard key={index} name={item.name} species={item.species} gender={item.gender} type={item.type} status={item.status} image={item.image} />
-                    <button onClick={() => openModal()}>Info</button>
+                  <Tilt key={index} options={defaultOptions}>
+                    <div key={item.id} style={{ backgroundColor: 'grey', margin: '20px', padding: '20px', borderRadius: '10px' }}>
+                      <ApiCard key={index} name={item.name} species={item.species} gender={item.gender} type={item.type} status={item.status} image={item.image} />
+                      <button onClick={() => openModal()}>Info</button>
 
-                    <MyVerticallyCenteredModal
-                      show={modalIsOpen}
-                      onHide={() => setIsOpen(false)}
-                    />
+                      <MyVerticallyCenteredModal
+                        item={item}
+                        show={modalIsOpen}
+                        onHide={() => setIsOpen(false)}
+                      />
 
-                  </div>
+                    </div>
+                  </Tilt>
                 )
               })}
             </div>
